@@ -8,13 +8,15 @@ class Recipe {
         this.tags = recipeData.tags
         this.ingredientsData = ingredientsData
     }
-    calculateIngredientsName() {
-
+    getIngredientsName(name) {
+        console.log(ingredient)
+        return this.ingredients.filter(ingredient => ingredient.recipeData.ingredients.includes(name));
+        
     }
     calculateIngredientsCosts() {
-
+        
     }
-    returnIngredients() {
+    returnInstructions() {
 
     }
 }
