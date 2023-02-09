@@ -10,7 +10,7 @@ describe('Recipe', () => {
     let recipeDetails;
 
   beforeEach(() => {
-    //  recipe = new Recipe(sampleIngredientData)
+    // recipe = new Recipe(recipeDetails, ingredientDataSet)
     beforeEach(() => {
       ingredient1 =     {
         "id": 20081,
@@ -96,5 +96,7 @@ describe('Recipe', () => {
     it('should have an image', () => {
         expect(recipe.image).to.equal('https://spoonacular.com/recipeImages/595736-556x370.jpg')
     })
-   
-})
+    // it('should get ingredient name', () => {
+    
+    //   }])
+    })
