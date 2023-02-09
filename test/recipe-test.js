@@ -96,8 +96,5 @@ describe('Recipe', () => {
     it('should have an image', () => {
         expect(recipe.image).to.equal('https://spoonacular.com/recipeImages/595736-556x370.jpg')
     })
-    // it('should get ingredient name', () => {
-    
-    //   }])
-    // })
+   
 })
