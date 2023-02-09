@@ -3,7 +3,7 @@ import RecipeRepository from '../src/classes/RecipeRepository';
 import Recipe from '../src/classes/recipe';
 import sampleData from '../src/sampleData';
 
-describe('Recipe', () => {
+describe('RecipeRepository', () => {
   let recipe
 
   beforeEach(() => {
@@ -14,7 +14,7 @@ describe('Recipe', () => {
     expect(RecipeRepository).to.be.a('function');
   });
 
-  it('should create a new class instance of Recipe', () => {
+  it('should create a new class instance of RecipeRepository', () => {
    expect(recipe).to.be.an.instanceOf(RecipeRepository)
   });
 
