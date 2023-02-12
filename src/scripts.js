@@ -14,6 +14,8 @@ let userProfile;
 const recipeContainer = document.querySelector('.recipe-container');
 const miniCardSection = document.getElementById('miniCardSection');
 const miniCardList = document.getElementById('miniCardList');
+const miniCardSingle = document.getElementById('recipeCard')
+
 const defaultView = document.getElementById('mainScreen');
 const overlay = document.querySelector('.overlay');
 
@@ -23,14 +25,11 @@ const buttonSavedRecipes = document.getElementById('savedRecipesButton');
 
 const buttonSearch = document.getElementById('searchBtn');
 const searchBar = document.getElementById('searchBar');
+const buttonSearchYourRecipes = document.getElementById("searchYourRecipeBtn");
+buttonSearchYourRecipes.addEventListener('click', viewRecipesToCookbyTag);
 
 // buttonSearch.addEventListener('click', searchForRecipe);
 
-// const searchForRecipe = () => {
-//     let input = searchBar.value
-//     RecipeRepository.getRecipeByTag(input)
-//     RecipeRepository.getRecipeByName(input)
-// }
 
 window.addEventListener('load', () => {
     fetchAll()
@@ -46,7 +45,7 @@ window.addEventListener('load', () => {
     viewHomePage()
     }) 
 });
-
+miniCardSingle.addEventListener('click',locateRecipe)
 buttonSearch.addEventListener('click', function() {
     searchForRecipe(searchBar.value)
 });
@@ -84,21 +83,26 @@ const viewHomePage = () => {
 //   let recipeData = data[2].recipeData;
 //   console.log(recipeRolodex) 
   let recipeHTML = recipeRolodex.recipes.map(recipe => `
-    <article class="recipe">
-      <h2 class="recipe-title">${recipe.name}</h2>
-      <img class="recipe-image" src="${recipe.image}" alt="${recipe.name}">
+    <article class="recipe" id="recipeCard">
+      <h2 class="recipe-title"data-parent="${recipe.id}">${recipe.name}</h2>
+      <img class="recipe-image" data-parent="${recipe.id}" src="${recipe.image}" alt="${recipe.name}">
     </article>
   `).join('');
   recipeContainer.innerHTML = recipeHTML;
 };
+
+function locateRecipe(event){
+
+  console.log(event.target.dataSet.parent)
+}
 
 function viewRecipesByTag(recipeTag) {
   console.log("tag name:", recipeTag.name)
   const searchTag = recipeTag.forEach(recipe => {
   recipeContainer.innerHTML += ` 
     <article class="recipe">
-      <h2 class="recipe-title">${recipe.name}</h2>
-      <img class="recipe-image" src="${recipe.image}" alt="${recipe.name}">   
+      <h2 class="recipe-title" data-parent="${recipe.id}">${recipe.name}</h2>
+      <img class="recipe-image" data-parent="${recipe.id}" src="${recipe.image}" alt="${recipe.name}">   
     </article>`
   });
   return searchTag
@@ -115,6 +119,17 @@ function viewRecipeByName(name){
 // </article>`)
 // recipeContainer.innerHTML = nameHTML;
 };
+
+
+function viewRecipesToCookbyTag() {
+  let recipesToCookTagHTML = userProfile.recipesToCook.filterRecipesByTag(tag).map(recipe => ` <article class="recipe">
+  <h2 class="recipe-title" data-parent="${recipe.id}">${recipe.tag}</h2>
+  <img class="recipe-image" data-parent="${recipe.id}" src="${recipe.tag}" alt="${recipe.tag}">
+</article>`).join('')
+recipeContainer.innerHTML = tagHTML;
+}
+
+
 
 
 /*
