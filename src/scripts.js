@@ -14,6 +14,7 @@ let userProfile;
 const recipeContainer = document.querySelector('.recipe-container');
 const miniCardSection = document.getElementById('miniCardSection');
 const miniCardList = document.getElementById('miniCardList');
+
 const miniCardSingle = document.getElementById('recipeCard')
 
 const defaultView = document.getElementById('mainScreen');
@@ -26,6 +27,7 @@ const buttonSavedRecipes = document.getElementById('savedRecipesButton');
 const buttonSearch = document.getElementById('searchBtn');
 const searchBar = document.getElementById('searchBar');
 const buttonSearchYourRecipes = document.getElementById("searchYourRecipeBtn");
+
 buttonSearchYourRecipes.addEventListener('click', viewRecipesToCookbyTag);
 
 // buttonSearch.addEventListener('click', searchForRecipe);
@@ -41,11 +43,15 @@ window.addEventListener('load', () => {
 
     // ingredientsData = allApis[1]
     recipeRolodex = new RecipeRepository(data[2].recipeData)
-    console.log(recipeRolodex)
+    // console.log(recipeRolodex)
     viewHomePage()
     }) 
 });
-miniCardSingle.addEventListener('click',locateRecipe)
+
+recipeContainer.addEventListener('click', matchRecipe)
+
+
+
 buttonSearch.addEventListener('click', function() {
     searchForRecipe(searchBar.value)
 });
@@ -83,18 +89,28 @@ const viewHomePage = () => {
 //   let recipeData = data[2].recipeData;
 //   console.log(recipeRolodex) 
   let recipeHTML = recipeRolodex.recipes.map(recipe => `
-    <article class="recipe" id="recipeCard">
-      <h2 class="recipe-title"data-parent="${recipe.id}">${recipe.name}</h2>
+    <article class="recipe" data-parent="${recipe.id}" id="recipeCard">
+      <h2 class="recipe-title" data-parent="${recipe.id}">${recipe.name}</h2>
       <img class="recipe-image" data-parent="${recipe.id}" src="${recipe.image}" alt="${recipe.name}">
     </article>
   `).join('');
   recipeContainer.innerHTML = recipeHTML;
 };
 
-function locateRecipe(event){
+function matchRecipe(event){
+// if id of data-parent matches id of input
+  console.log(event.target.dataset.parent)
+  recipeRolodex.recipes
+    .forEach(recipe => {
+        if(recipe.id === +(event.target.dataset.parent)){
+            userData.recipesToCook.push(recipe)
+        }
+    })
+    console.log(userData.recipesToCook)
+};
 
-  console.log(event.target.dataSet.parent)
-}
+
+
 
 function viewRecipesByTag(recipeTag) {
   console.log("tag name:", recipeTag.name)
