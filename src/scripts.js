@@ -27,11 +27,12 @@ const buttonSavedRecipes = document.getElementById('savedRecipesButton');
 const buttonSearch = document.getElementById('searchBtn');
 const searchBar = document.getElementById('searchBar');
 const buttonSearchYourRecipes = document.getElementById("searchYourRecipeBtn");
+const buttonHeart = document.getElementById('heartIcon')
 
 buttonSearchYourRecipes.addEventListener('click', viewRecipesToCookbyTag);
 
 // buttonSearch.addEventListener('click', searchForRecipe);
-
+buttonSearchYourRecipes.addEventListener('click', viewRecipesToCookbyTag);
 
 window.addEventListener('load', () => {
     fetchAll()
@@ -46,7 +47,7 @@ window.addEventListener('load', () => {
     }) 
 });
 
-recipeContainer.addEventListener('click', matchRecipe)
+recipeContainer.addEventListener('click', saveRecipe)
 
 
 
@@ -112,17 +113,25 @@ const viewHomePage = () => {
   recipeContainer.innerHTML = recipeHTML;
 };
 
-function matchRecipe(event){
-// if id of data-parent matches id of input
-  console.log(event.target.dataset.parent)
-  recipeRolodex.recipes
-    .forEach(recipe => {
-        if(recipe.id === +(event.target.dataset.parent)){
-            userData.recipesToCook.push(recipe)
-        }
-    })
-    console.log(userData.recipesToCook)
-};
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+function saveRecipe(event){
+    console.log(event.target.dataset.parent)
+    recipeRolodex.recipes
+      .forEach(recipe => {
+          if(recipe.id === +(event.target.dataset.parent)){
+              userProfile.recipesToCook.push(recipe)
+          }
+      })
+      // toggle heart icon images
+    //   console.log(userProfile.recipesToCook)
+  };
+
+
+
 
 
 
