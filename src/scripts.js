@@ -93,11 +93,11 @@ function getRandomUserId(){
 };
 
 function show(element) {
-  element.classList.remove('.hidden');
+  element.classList.remove('hidden');
 };
 
 function hide(element) {
-  element.classList.add('.hidden');
+  element.classList.add('hidden');
 };
 
 const viewHomePage = () => {
@@ -129,15 +129,11 @@ function saveRecipe(event){
               userProfile.recipesToCook.push(recipe)
           }
       })
-      // toggle heart icon images
-    //   console.log(userProfile.recipesToCook)
     let heartIcon = document.getElementById('heartIcon');
-    let heartPink = document.querySelector('heart-pink');
+    let heartPink = document.querySelector('.heart-pink');
     hide(heartIcon)
     show(heartPink)
   };
-
-
 
 
 
