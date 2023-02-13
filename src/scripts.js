@@ -4,7 +4,8 @@ import fetchAll from './apiCalls';
 import Recipe from './classes/recipe';
 import User from './classes/user';
 import RecipeRepository from './classes/RecipeRepository';
-import './images/turing-logo.png'
+import './images/heart-pink.png'
+import './images/heart-icon.png'
 
 let userData;
 let ingredientsData;
@@ -28,10 +29,12 @@ const buttonSearch = document.getElementById('searchBtn');
 const searchBar = document.getElementById('searchBar');
 const buttonSearchYourRecipes = document.getElementById("searchYourRecipeBtn");
 
+// const heartIcon = document.getElementById('heartIcon');
+// const heartPink = document.querySelector('heart-pink');
+
+
 buttonSearchYourRecipes.addEventListener('click', viewRecipesToCookbyTag);
-
-// buttonSearch.addEventListener('click', searchForRecipe);
-
+buttonSearchYourRecipes.addEventListener('click', viewRecipesToCookbyTag);
 
 window.addEventListener('load', () => {
     fetchAll()
@@ -46,7 +49,7 @@ window.addEventListener('load', () => {
     }) 
 });
 
-recipeContainer.addEventListener('click', matchRecipe)
+recipeContainer.addEventListener('click', saveRecipe)
 
 
 
@@ -79,7 +82,7 @@ function searchForRecipeTag(input) {
     } else { 
     recipeContainer.innerHTML = `<h2>Cool Shiba says, no. Try again.</h2>`
   }
-} 
+};
 
 
 // else if(recipeRolodex.getRecipeByName(input).length > 0){
@@ -105,24 +108,33 @@ const viewHomePage = () => {
     </article>
     <article class="recipe-name-area">
       <h2 class="recipe-name" tabindex="0" data-parent="${recipe.id}">${recipe.name}</h2><article class="all-card-icons">
-      <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="triggerFavoritesIcon" tabindex="0" src="https://i.postimg.cc/9fSC0FND/heart.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
+      <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="triggerFavoritesIcon" tabindex="0" src="/images/heart-icon.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
+      <button id="triggerInfoButton"><img class="hidden heart-pink card-icon" id="triggerFavoritesIcon" tabindex="0" src="/images/heart-pink.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
     </article>
   </article>
   `).join('');
   recipeContainer.innerHTML = recipeHTML;
 };
 
-function matchRecipe(event){
-// if id of data-parent matches id of input
-  console.log(event.target.dataset.parent)
-  recipeRolodex.recipes
-    .forEach(recipe => {
-        if(recipe.id === +(event.target.dataset.parent)){
-            userData.recipesToCook.push(recipe)
-        }
-    })
-    console.log(userData.recipesToCook)
-};
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+function saveRecipe(event){
+    console.log(event.target.dataset.parent)
+    recipeRolodex.recipes
+      .forEach(recipe => {
+          if(recipe.id === +(event.target.dataset.parent)){
+              userProfile.recipesToCook.push(recipe)
+          }
+      })
+    let heartIcon = document.getElementById('heartIcon');
+    let heartPink = document.querySelector('.heart-pink');
+    hide(heartIcon)
+    show(heartPink)
+  };
+
 
 
 
