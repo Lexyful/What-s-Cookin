@@ -99,10 +99,15 @@ function hide(element) {
 
 const viewHomePage = () => {
   let recipeHTML = recipeRolodex.recipes.map(recipe => `
-    <article class="recipe" data-parent="${recipe.id}" id="recipeCard">
-      <h2 class="recipe-title" data-parent="${recipe.id}">${recipe.name}</h2>
-      <img class="recipe-image" data-parent="${recipe.id}" src="${recipe.image}" alt="${recipe.name}">
+    <article class="mini-recipe-card" data-parent="${recipe.id}>
+    <article class="card-image-section">
+      <img class="card-image" tabindex="0" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
     </article>
+    <article class="recipe-name-area">
+      <h2 class="recipe-name" tabindex="0" data-parent="${recipe.id}">${recipe.name}</h2><article class="all-card-icons">
+      <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="triggerFavoritesIcon" tabindex="0" src="https://i.postimg.cc/9fSC0FND/heart.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
+    </article>
+  </article>
   `).join('');
   recipeContainer.innerHTML = recipeHTML;
 };
@@ -126,10 +131,15 @@ function viewRecipesByTag(recipeTag) {
   // console.log("tag name:", recipeTag.name)
   const searchTag = recipeTag.forEach(recipe => {
   recipeContainer.innerHTML += ` 
-    <article class="recipe">
-      <h2 class="recipe-title" data-parent="${recipe.id}">${recipe.name}</h2>
-      <img class="recipe-image" data-parent="${recipe.id}" src="${recipe.image}" alt="${recipe.name}">   
-    </article>`
+  <article class="mini-recipe-card" data-parent="${recipe.id}>
+  <article class="card-image-section">
+    <img class="card-image" tabindex="0" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
+  </article>
+  <article class="recipe-name-area">
+    <h2 class="recipe-name" tabindex="0" data-parent="${recipe.id}">${recipe.name}</h2><article class="all-card-icons">
+    <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="triggerFavoritesIcon" tabindex="0" src="https://i.postimg.cc/9fSC0FND/heart.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
+  </article>
+</article>`
   });
   return searchTag
 };
@@ -138,10 +148,15 @@ function viewRecipesByName(recipeTag){
 console.log("recipe name:", recipeTag.name)
 const searchName = recipeTag.forEach(recipe => {
   recipeContainer.innerHTML += `
-  <article class="recipe">
-      <h2 class="recipe-title">${recipe.name}</h2>
-      <img class="recipe-image" src="${recipe.image}" alt="${recipe.name}">   
-    </article>
+  <article class="mini-recipe-card" data-parent="${recipe.id}>
+  <article class="card-image-section">
+    <img class="card-image" tabindex="0" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
+  </article>
+  <article class="recipe-name-area">
+    <h2 class="recipe-name" tabindex="0" data-parent="${recipe.id}">${recipe.name}</h2><article class="all-card-icons">
+    <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="triggerFavoritesIcon" tabindex="0" src="https://i.postimg.cc/9fSC0FND/heart.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
+  </article>
+</article>
   `
 });
 return searchName
@@ -149,9 +164,15 @@ return searchName
 
 
 function viewRecipesToCookbyTag() {
-  let recipesToCookTagHTML = userProfile.recipesToCook.filterRecipesByTag(tag).map(recipe => ` <article class="recipe">
-  <h2 class="recipe-title" data-parent="${recipe.id}">${recipe.tag}</h2>
-  <img class="recipe-image" data-parent="${recipe.id}" src="${recipe.tag}" alt="${recipe.tag}">
+  let recipesToCookTagHTML = userProfile.recipesToCook.filterRecipesByTag(tag).map(recipe => `    <article class="mini-recipe-card" data-parent="${recipe.id}>
+  <article class="card-image-section">
+    <img class="card-image" tabindex="0" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
+  </article>
+  <article class="recipe-name-area">
+    <h2 class="recipe-name" tabindex="0" data-parent="${recipe.id}">${recipe.name}</h2><article class="all-card-icons">
+    <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="triggerFavoritesIcon" tabindex="0" src="https://i.postimg.cc/9fSC0FND/heart.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
+  </article>
+  </article>
 </article>`).join('')
 recipeContainer.innerHTML = tagHTML;
 }
