@@ -29,12 +29,12 @@ const buttonSearch = document.getElementById('searchBtn');
 const searchBar = document.getElementById('searchBar');
 const buttonSearchYourRecipes = document.getElementById("searchYourRecipeBtn");
 
-// const heartIcon = document.getElementById('heartIcon');
-// const heartPink = document.querySelector('heart-pink');
+const heartIcon = document.getElementById('heartIcon');
+const heartPink = document.querySelector('heart-pink');
 
 
-buttonSearchYourRecipes.addEventListener('click', viewRecipesToCookbyTag);
-buttonSearchYourRecipes.addEventListener('click', viewRecipesToCookbyTag);
+// buttonSearchYourRecipes.addEventListener('click', viewRecipesToCookbyTag);
+// buttonSearchYourRecipes.addEventListener('click', viewRecipesToCookbyTag);
 
 window.addEventListener('load', () => {
     fetchAll()
@@ -122,13 +122,14 @@ const viewHomePage = () => {
 
 
 function saveRecipe(event){
-    console.log(event.target.dataset.parent)
+    console.log("event", event.target.dataset.parent)
     recipeRolodex.recipes
       .forEach(recipe => {
           if(recipe.id === +(event.target.dataset.parent)){
               userProfile.recipesToCook.push(recipe)
           }
       })
+      console.log("recipes to cook",userProfile.recipesToCook)
     let heartIcon = document.getElementById('heartIcon');
     let heartPink = document.querySelector('.heart-pink');
     hide(heartIcon)
