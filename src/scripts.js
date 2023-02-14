@@ -92,13 +92,13 @@ function getRandomUserId(){
     return Math.floor(Math.random() * 41);
 };
 
-function show(element) {
-  element.classList.remove('hidden');
-};
+// function show(element) {
+//   element.classList.remove('hidden');
+// };
 
-function hide(element) {
-  element.classList.add('hidden');
-};
+// function hide(element) {
+//   element.classList.add('hidden');
+// };
 
 const viewHomePage = () => {
   let recipeHTML = recipeRolodex.recipes.map(recipe => `
@@ -122,18 +122,23 @@ const viewHomePage = () => {
 
 
 function saveRecipe(event){
+  let heartIcon = document.getElementById('heartIcon');
+  let heartPink = document.querySelector('.heart-pink');
     console.log("event", event.target.dataset.parent)
     recipeRolodex.recipes
       .forEach(recipe => {
           if(recipe.id === +(event.target.dataset.parent)){
               userProfile.recipesToCook.push(recipe)
+              recipe.pinkHeartIcon = true
+          }
+          if(recipe.pinkHeartIcon === true){
+            heartPink.classList.remove('hidden')
+            heartIcon.classList.add('hidden')
           }
       })
       console.log("recipes to cook",userProfile.recipesToCook)
-    let heartIcon = document.getElementById('heartIcon');
-    let heartPink = document.querySelector('.heart-pink');
-    hide(heartIcon)
-    show(heartPink)
+    // hide(heartIcon)
+    // show(heartPink)
   };
 
 
