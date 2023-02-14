@@ -7,6 +7,7 @@ class Recipe {
         this.name = recipeData.name
         this.tags = recipeData.tags
         this.ingredientsData = ingredientsData
+        this.pinkHeartIcon = false
        
     }
     getIngredientsName(name) {
