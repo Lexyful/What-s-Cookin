@@ -63,6 +63,9 @@ Upon loading the web application's main interface, a user will see multiple reci
 - There were times where all of us as developers had different approaches and tasks we desired to take on at a given time throughout the development of our project. We made sure to communicate major changes using our GitHub project board and had daily scheduled meetings to check in with one another through Zoom.
 - We had some trouble delegating certain tasks. We spent the majority of the time together and that made it hard to accomplish every goal we wanted to.
 - We had some issues with working with certain Javascript classes tied to our DOM.
+- We had to work with with three other partners on integrating multiple data models and data manipulation techniques while making sure the code is modular and reusable has been a challenge.
+- Writing tests in proper syntax that cover a variety of happy/path scenarios which test the code has been a great learning curve and added perspective into code architecture of a project. 
+- Debugging and fixing any bugs or issues that have arise has been both challenging and rewarding considering the group dynamics / problem-solving as we progress with this project.
 
 ### Wins
 - We were able to get our classes for our different pieces of information to display successfully onto the main interface of our web application.
@@ -71,6 +74,9 @@ Upon loading the web application's main interface, a user will see multiple reci
 - We successfully added the GitHub project board feature to our workflow.
 - We became much more comfortable with my class to class interaction. It became much easier to set up my classes and our overall abilities to work with a console and debug have improved as well.
 - We learned fetch requests and how to use APIs. Practicing more class-to-class interaction and getting to do more unit tests was also very helpful.
+- By participating in the development of this application, we were able to gain hands-on experience with new technologies and techniques such as ES6, object and array prototype methods, Fetch API, and Webpack. 
+- Our success in implementing a functioning application and data-model has allowed us to enhance our skills in designing user interfaces and visualizing data, as well as ways to improve our abilities in data manipulation and integrating multiple data sources. 
+- Our group work on modular reusable code, network requests and data retrieval has helped us to refine our skills problem-solve in these areas as a group, which is helping to make us collaborative and communicative software developers.
 
 ### Future Considerations
 - Implement a more accessible website layout with now dynamic element sizing
