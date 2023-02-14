@@ -101,19 +101,22 @@ function getRandomUserId(){
 // };
 
 const viewHomePage = () => {
-  let recipeHTML = recipeRolodex.recipes.map(recipe => `
-    <article class="mini-recipe-card" data-parent="${recipe.id}>
+  recipeContainer.innerHTML = ''
+  let recipeHTML = recipeRolodex.recipes.map(recipe =>
+    recipeContainer.innerHTML += `
+    <div class="one-recipe">
+    <article class="mini-recipe-card" data-parent="${recipe.id}">
     <article class="card-image-section">
       <img class="card-image" tabindex="0" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
     </article>
     <article class="recipe-name-area">
       <h2 class="recipe-name" tabindex="0" data-parent="${recipe.id}">${recipe.name}</h2><article class="all-card-icons">
-      <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="triggerFavoritesIcon" tabindex="0" src="/images/heart-icon.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
+      <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="heartIcon" tabindex="0" src="/images/heart-icon.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
       <button id="triggerInfoButton"><img class="hidden heart-pink card-icon" id="triggerFavoritesIcon" tabindex="0" src="/images/heart-pink.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
     </article>
-  </article>
-  `).join('');
-  recipeContainer.innerHTML = recipeHTML;
+    </article>
+    </div>
+  `);
 };
 
 
@@ -122,19 +125,19 @@ const viewHomePage = () => {
 
 
 function saveRecipe(event){
-  let heartIcon = document.getElementById('heartIcon');
+  let heartIcon = document.querySelector('heart-icon');
   let heartPink = document.querySelector('.heart-pink');
     console.log("event", event.target.dataset.parent)
     recipeRolodex.recipes
       .forEach(recipe => {
           if(recipe.id === +(event.target.dataset.parent)){
+            console.log('this is firing')
               userProfile.recipesToCook.push(recipe)
               recipe.pinkHeartIcon = true
+              heartPink.classList.remove('hidden')
+              heartIcon.classList.add('hidden')
           }
-          if(recipe.pinkHeartIcon === true){
-            heartPink.classList.remove('hidden')
-            heartIcon.classList.add('hidden')
-          }
+          
       })
       console.log("recipes to cook",userProfile.recipesToCook)
     // hide(heartIcon)
@@ -181,19 +184,19 @@ return searchName
 };
 
 
-function viewRecipesToCookbyTag() {
-  let recipesToCookTagHTML = userProfile.recipesToCook.filterRecipesByTag(tag).map(recipe => `    <article class="mini-recipe-card" data-parent="${recipe.id}>
-  <article class="card-image-section">
-    <img class="card-image" tabindex="0" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
-  </article>
-  <article class="recipe-name-area">
-    <h2 class="recipe-name" tabindex="0" data-parent="${recipe.id}">${recipe.name}</h2><article class="all-card-icons">
-    <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="triggerFavoritesIcon" tabindex="0" src="https://i.postimg.cc/9fSC0FND/heart.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
-  </article>
-  </article>
-</article>`).join('')
-recipeContainer.innerHTML = tagHTML;
-}
+// function viewRecipesToCookbyTag() {
+//   let recipesToCookTagHTML = userProfile.recipesToCook.filterRecipesByTag(tag).map(recipe => `    <article class="mini-recipe-card" data-parent="${recipe.id}>
+//   <article class="card-image-section">
+//     <img class="card-image" tabindex="0" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
+//   </article>
+//   <article class="recipe-name-area">
+//     <h2 class="recipe-name" tabindex="0" data-parent="${recipe.id}">${recipe.name}</h2><article class="all-card-icons">
+//     <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="triggerFavoritesIcon" tabindex="0" src="https://i.postimg.cc/9fSC0FND/heart.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
+//   </article>
+//   </article>
+// </article>`).join('')
+// recipeContainer.innerHTML = tagHTML;
+// }
 
 
 
