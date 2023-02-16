@@ -23,9 +23,7 @@ class Recipe {
         total += ingredient.quantity.amount * ingredientData.estimatedCostInCents;
     }
     });
-    
         return `$${(total / 100).toFixed(2)}`;
-      
     }
 
     returnInstructions() {

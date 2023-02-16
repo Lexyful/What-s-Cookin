@@ -112,7 +112,6 @@ const viewHomePage = () => {
             <img class="card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
         </article>
 
-        <article class="recipe-name-area">
             <h2 class="recipe-name" data-parent="${recipe.id}">${recipe.name}</h2>
 
         <article class="all-card-icons" data-parent="${recipe.id}">
@@ -136,28 +135,36 @@ const viewHomePage = () => {
 
 
 function saveRecipe(event){
-  let heartBtn = document.getElementById('heart-btn');
-  let pinkHeartBtn = document.getElementById('pink-heart-btn');
-    // console.log("event", event.target.closest('button'))
+  let parent = event.target.closest('article');
+  let heartBtn = parent.firstElementChild;
+  let pinkHeartBtn = parent.lastElementChild;
+    console.log("event!", parent.parentNode)
     recipeRolodex.recipes
       .forEach(recipe => {
-          if(recipe.id === +(event.target.closest('button').dataset.parent)){
-            console.log('this is firing', event.target.dataset.parent)
+          if(recipe.id === +(event.target.closest('article').dataset.parent)){
+            console.log('this is firing', event.target.closest('article').dataset.parent)
               userProfile.recipesToCook.push(recipe)
 
-              recipe.pinkHeartBtn = true
-            //   heartBtn.classList.remove('hidden')
-            //   pinkHeartBtn.classList.add('hidden')
+              recipe.pinkHeartBtn = true 
+            // if pinkHeartBtn = true then show in saved
+            // add this to data model!!
+
+            // if recipe is contained in recipesToCook, then should show pink heart and hide empty heart
+
             hide(heartBtn)
             show(pinkHeartBtn)
-          }
-          
+          } 
       })
-      console.log("recipes to cook",userProfile.recipesToCook)
-    // hide(heartIcon)
-    // show(heartPink)
+    //   console.log("recipes to cook",userProfile.recipesToCook)
   };
 
+
+
+  function unsaveRecipe(){
+    hide(pinkHeartBtn)
+    show(heartBtn)
+  }
+  // ^^ not functional! but maybe can work this way
 
 
 
