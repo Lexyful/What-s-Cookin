@@ -7,7 +7,7 @@ class Recipe {
         this.name = recipeData.name
         this.tags = recipeData.tags
         this.ingredientsData = ingredientsData
-        this.pinkHeartIcon = false
+        this.pinkHeartBtn = false
        
     }
     getIngredientsName(name) {
@@ -23,9 +23,7 @@ class Recipe {
         total += ingredient.quantity.amount * ingredientData.estimatedCostInCents;
     }
     });
-    
         return `$${(total / 100).toFixed(2)}`;
-      
     }
 
     returnInstructions() {

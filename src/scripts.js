@@ -29,8 +29,8 @@ const buttonSearch = document.getElementById('searchBtn');
 const searchBar = document.getElementById('searchBar');
 const buttonSearchYourRecipes = document.getElementById("searchYourRecipeBtn");
 
-const heartIcon = document.getElementById('heartIcon');
-const heartPink = document.querySelector('heart-pink');
+// const heartIcon = document.getElementById('heartIcon');
+// const heartPink = document.querySelector('heart-pink');
 
 
 // buttonSearchYourRecipes.addEventListener('click', viewRecipesToCookbyTag);
@@ -41,7 +41,7 @@ window.addEventListener('load', () => {
     .then(data => {
     const idNum = getRandomUserId()
     userProfile = new User(data[0].usersData.find(user => user.id === idNum))
-    console.log('user profile:', userProfile)
+    // console.log('user profile:', userProfile)
     // ingredientsData = allApis[1]
     recipeRolodex = new RecipeRepository(data[2].recipeData)
     // console.log(recipeRolodex)
@@ -92,30 +92,40 @@ function getRandomUserId(){
     return Math.floor(Math.random() * 41);
 };
 
-// function show(element) {
-//   element.classList.remove('hidden');
-// };
+function show(element) {
+  element.classList.remove('hidden');
+};
 
-// function hide(element) {
-//   element.classList.add('hidden');
-// };
+function hide(element) {
+  element.classList.add('hidden');
+};
 
 const viewHomePage = () => {
   recipeContainer.innerHTML = ''
   let recipeHTML = recipeRolodex.recipes.map(recipe =>
     recipeContainer.innerHTML += `
-    <div class="one-recipe">
-    <article class="mini-recipe-card" data-parent="${recipe.id}">
-    <article class="card-image-section">
-      <img class="card-image" tabindex="0" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
+    <article class="one-recipe">
+
+        <div class="mini-recipe-card" data-parent="${recipe.id}">
+
+        <article class="card-image-section">
+            <img class="card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
+        </article>
+
+            <h2 class="recipe-name" data-parent="${recipe.id}">${recipe.name}</h2>
+
+        <article class="all-card-icons" data-parent="${recipe.id}">
+            <button data-title="Click to save this recipe!" id="heart-btn" data-parent="${recipe.id}">
+                <img class="heart-icon card-icon" id="heartIcon" src="/images/heart-icon.png" alt="a heart to add recipe to favorites">
+            </button>
+
+            <button class="hidden" id="pink-heart-btn" data-parent="${recipe.id}">
+                <img class="heart-pink card-icon" src="/images/heart-pink.png" alt="a heart to add recipe to favorites">
+            </button>
+        </article>
+
+        </div>
     </article>
-    <article class="recipe-name-area">
-      <h2 class="recipe-name" tabindex="0" data-parent="${recipe.id}">${recipe.name}</h2><article class="all-card-icons">
-      <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="heartIcon" tabindex="0" src="/images/heart-icon.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
-      <button id="triggerInfoButton"><img class="hidden heart-pink card-icon" id="triggerFavoritesIcon" tabindex="0" src="/images/heart-pink.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
-    </article>
-    </article>
-    </div>
   `);
 };
 
@@ -125,25 +135,36 @@ const viewHomePage = () => {
 
 
 function saveRecipe(event){
-  let heartIcon = document.querySelector('heart-icon');
-  let heartPink = document.querySelector('.heart-pink');
-    console.log("event", event.target.dataset.parent)
+  let parent = event.target.closest('article');
+  let heartBtn = parent.firstElementChild;
+  let pinkHeartBtn = parent.lastElementChild;
+    console.log("event!", parent.parentNode)
     recipeRolodex.recipes
       .forEach(recipe => {
-          if(recipe.id === +(event.target.dataset.parent)){
-            console.log('this is firing')
+          if(recipe.id === +(event.target.closest('article').dataset.parent)){
+            console.log('this is firing', event.target.closest('article').dataset.parent)
               userProfile.recipesToCook.push(recipe)
-              recipe.pinkHeartIcon = true
-              heartPink.classList.remove('hidden')
-              heartIcon.classList.add('hidden')
-          }
-          
+
+              recipe.pinkHeartBtn = true 
+            // if pinkHeartBtn = true then show in saved
+            // add this to data model!!
+
+            // if recipe is contained in recipesToCook, then should show pink heart and hide empty heart
+
+            hide(heartBtn)
+            show(pinkHeartBtn)
+          } 
       })
-      console.log("recipes to cook",userProfile.recipesToCook)
-    // hide(heartIcon)
-    // show(heartPink)
+    //   console.log("recipes to cook",userProfile.recipesToCook)
   };
 
+
+
+  function unsaveRecipe(){
+    hide(pinkHeartBtn)
+    show(heartBtn)
+  }
+  // ^^ not functional! but maybe can work this way
 
 
 
