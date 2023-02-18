@@ -39,18 +39,14 @@
         </section>
 
         <section class="recipe-container">
+          <!-- this is where the mini cards go! -->
         </section>
-
-        <div class="saved-and-shiba-icon">
-          <label onclick="showNav()" 
-          for="saved-recipes" class="nav-open">Saved Recipes</label> 
-          <img class="shiba-stare" src="/src/images/shiba-cool.png" alt="doge wearing sunglasses icon ">
-        </div>
         
         <section class="mini-cards-section" id="miniCardSection">
             <section class="mini-card-list" id="miniCardList">
-    <!-- this is where the cards go! -->
+    
             </section>
+
             <section class="recipe-display hidden">
               <section class="recipe-display-main">
                 <img class="x-menu" src="https://i.postimg.cc/267wS30Y/close.png" alt="x icon for exiting information on a recipe">
@@ -66,24 +62,14 @@
           </div>
         </section>
       </div>
-<!-- -->
-  <!-- side bar shenanigans -->
-    <aside>     
-    </aside>      
-      <div class="side-bar" id="leftNav">
-        <div>
-        <label class="close-btn" onclick="hideNav()">
-          Bri is awesome
-        </label>
-      </div>
-        <!-- <ul class="navbar-out">
-          <li class="nav-item">
 
-          </li>
-        </ul> -->
+
+
+
       </div>
     </div> 
-    <!-- second side-bar shenanigan  -->
+    
+
 <!-- recipe icons to click on -->
 <!-- hidden pop-up recipe card 
           <article class="overlay hidden recipe-card" id="recipeCard">
@@ -94,14 +80,10 @@
               <button class="saved-recipe" id="savedRecipe">
             </div>  
           </article>
-  </body> -->
-  <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
+  </body> 
+  
   <script src="bundle.js"></script>
-  <script>function showNav(){
-    document.getElementById("leftNav").style.width = "200px";
-  }
-  function hideNav(){
-    document.getElementById("leftNav").style.width = "0px";
-  }
-    </script>
+
+
+
 </html>

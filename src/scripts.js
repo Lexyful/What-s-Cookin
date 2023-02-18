@@ -1,6 +1,5 @@
 import './styles.css';
 import fetchAll from './apiCalls';
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import Recipe from './classes/recipe';
 import User from './classes/user';
 import RecipeRepository from './classes/RecipeRepository';
@@ -9,6 +8,7 @@ import './images/heart-icon.png'
 
 import ingredientsData from './data/ingredients'
 // ^^ this is the problem, it's this
+// need to work on connecting the api to the classes, some of them arent talking atm
 
 let userData;
 // let ingredientsData;
@@ -58,8 +58,6 @@ window.addEventListener('load', () => {
 });
 
 recipeContainer.addEventListener('click', saveRecipe)
-
-
 
 buttonSearch.addEventListener('click', function() {
   if (searchBar.value.startsWith("#")) {
@@ -113,25 +111,19 @@ const viewHomePage = () => {
   let recipeHTML = recipeRolodex.recipes.map(recipe =>
     recipeContainer.innerHTML += `
     <article class="one-recipe">
-
         <div class="mini-recipe-card" data-parent="${recipe.id}">
-
         <article class="card-image-section">
             <img class="card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
         </article>
-
             <h2 class="recipe-name" data-parent="${recipe.id}">${recipe.name}</h2>
-
         <article class="all-card-icons" data-parent="${recipe.id}">
             <button data-title="Click to save this recipe!" id="heart-btn" data-parent="${recipe.id}">
                 <img class="heart-icon card-icon" id="heartIcon" src="/images/heart-icon.png" alt="a heart to add recipe to favorites">
             </button>
-
             <button class="hidden" id="pink-heart-btn" data-parent="${recipe.id}">
                 <img class="heart-pink card-icon" src="/images/heart-pink.png" alt="a heart to add recipe to favorites">
             </button>
         </article>
-
         </div>
     </article>
   `);
@@ -165,38 +157,36 @@ function saveRecipe(event){
                 console.log(userProfile.recipesToCook)
               hide(pinkHeartBtn)
               show(heartBtn)
-
           }
       }) 
       console.log("recipes to cook",userProfile.recipesToCook)
   };
 
 
-  function unsaveRecipe(){
-    if(recipe.pinkHeartBtn){
-    hide(pinkHeartBtn)
-    show(heartBtn)
-    // slice
-  }
-};
-  // ^^ not functional! but maybe can work this way
 
-
-
+// **** note: favorites do not persist once a tag or name is searched
 
 function viewRecipesByTag(recipeTag) {
   // console.log("tag name:", recipeTag.name)
   const searchTag = recipeTag.forEach(recipe => {
-  recipeContainer.innerHTML += ` 
-  <article class="mini-recipe-card" data-parent="${recipe.id}>
-  <article class="card-image-section">
-    <img class="card-image" tabindex="0" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
-  </article>
-  <article class="recipe-name-area">
-    <h2 class="recipe-name" tabindex="0" data-parent="${recipe.id}">${recipe.name}</h2><article class="all-card-icons">
-    <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="triggerFavoritesIcon" tabindex="0" src="https://i.postimg.cc/9fSC0FND/heart.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
-  </article>
-</article>`
+  recipeContainer.innerHTML += `
+<article class="one-recipe">
+<div class="mini-recipe-card" data-parent="${recipe.id}">
+<article class="card-image-section">
+    <img class="card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
+</article>
+    <h2 class="recipe-name" data-parent="${recipe.id}">${recipe.name}</h2>
+<article class="all-card-icons" data-parent="${recipe.id}">
+    <button data-title="Click to save this recipe!" id="heart-btn" data-parent="${recipe.id}">
+        <img class="heart-icon card-icon" id="heartIcon" src="/images/heart-icon.png" alt="a heart to add recipe to favorites">
+    </button>
+    <button class="hidden" id="pink-heart-btn" data-parent="${recipe.id}">
+        <img class="heart-pink card-icon" src="/images/heart-pink.png" alt="a heart to add recipe to favorites">
+    </button>
+</article>
+</div>
+</article>
+`
   });
   return searchTag
 };
@@ -205,16 +195,23 @@ function viewRecipesByName(recipeTag){
 console.log("recipe name:", recipeTag.name)
 const searchName = recipeTag.forEach(recipe => {
   recipeContainer.innerHTML += `
-  <article class="mini-recipe-card" data-parent="${recipe.id}>
+  <article class="one-recipe">
+  <div class="mini-recipe-card" data-parent="${recipe.id}">
   <article class="card-image-section">
-    <img class="card-image" tabindex="0" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
+      <img class="card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
   </article>
-  <article class="recipe-name-area">
-    <h2 class="recipe-name" tabindex="0" data-parent="${recipe.id}">${recipe.name}</h2><article class="all-card-icons">
-    <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="triggerFavoritesIcon" tabindex="0" src="https://i.postimg.cc/9fSC0FND/heart.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
+      <h2 class="recipe-name" data-parent="${recipe.id}">${recipe.name}</h2>
+  <article class="all-card-icons" data-parent="${recipe.id}">
+      <button data-title="Click to save this recipe!" id="heart-btn" data-parent="${recipe.id}">
+          <img class="heart-icon card-icon" id="heartIcon" src="/images/heart-icon.png" alt="a heart to add recipe to favorites">
+      </button>
+      <button class="hidden" id="pink-heart-btn" data-parent="${recipe.id}">
+          <img class="heart-pink card-icon" src="/images/heart-pink.png" alt="a heart to add recipe to favorites">
+      </button>
   </article>
+  </div>
 </article>
-  `
+`
 });
 return searchName
 };
