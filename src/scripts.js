@@ -7,8 +7,11 @@ import RecipeRepository from './classes/RecipeRepository';
 import './images/heart-pink.png'
 import './images/heart-icon.png'
 
+import ingredientsData from './data/ingredients'
+// ^^ this is the problem, it's this
+
 let userData;
-let ingredientsData;
+// let ingredientsData;
 let recipeRolodex;
 let userProfile;
 
@@ -43,7 +46,12 @@ window.addEventListener('load', () => {
     userProfile = new User(data[0].usersData.find(user => user.id === idNum))
     // console.log('user profile:', userProfile)
     // ingredientsData = allApis[1]
-    recipeRolodex = new RecipeRepository(data[2].recipeData)
+    const classRecipeData = data[2].recipeData.map(recipe => {
+      return new Recipe(recipe, ingredientsData)
+    })
+// console.log(classRecipeData)
+    recipeRolodex = new RecipeRepository(classRecipeData)
+
     // console.log(recipeRolodex)
     viewHomePage()
     }) 
@@ -131,39 +139,46 @@ const viewHomePage = () => {
 
 
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 function saveRecipe(event){
   let parent = event.target.closest('article');
   let heartBtn = parent.firstElementChild;
   let pinkHeartBtn = parent.lastElementChild;
-    console.log("event!", parent.parentNode)
+    // console.log("event!", parent.parentNode)
     recipeRolodex.recipes
       .forEach(recipe => {
-          if(recipe.id === +(event.target.closest('article').dataset.parent)){
-            console.log('this is firing', event.target.closest('article').dataset.parent)
+          if(recipe.id === +(event.target.closest('article').dataset.parent) && !recipe.pinkHeartBtn){
+            // console.log('this is firing', event.target.closest('article').dataset.parent)
+              recipe.pinkHeartBtn = true
+              // console.log(recipe.pinkHeartBtn)
               userProfile.recipesToCook.push(recipe)
-
-              recipe.pinkHeartBtn = true 
-            // if pinkHeartBtn = true then show in saved
-            // add this to data model!!
-
-            // if recipe is contained in recipesToCook, then should show pink heart and hide empty heart
-
             hide(heartBtn)
             show(pinkHeartBtn)
-          } 
-      })
-    //   console.log("recipes to cook",userProfile.recipesToCook)
+          } else if(recipe.id === +(event.target.closest('article').dataset.parent) && recipe.pinkHeartBtn){
+            // console.log('this is firing a secod time', event.target.closest('article').dataset.parent)
+              recipe.pinkHeartBtn = false
+              // console.log(recipe.pinkHeartBtn)
+              const currentRecipeIndex = userProfile.recipesToCook
+                .findIndex(currentRecipe => currentRecipe.id === recipe.id)
+
+                console.log(userProfile.recipesToCook)
+                userProfile.recipesToCook.splice(currentRecipeIndex, 1)
+                console.log(userProfile.recipesToCook)
+              hide(pinkHeartBtn)
+              show(heartBtn)
+
+          }
+      }) 
+      console.log("recipes to cook",userProfile.recipesToCook)
   };
 
 
-
   function unsaveRecipe(){
+    if(recipe.pinkHeartBtn){
     hide(pinkHeartBtn)
     show(heartBtn)
+    // slice
   }
+};
   // ^^ not functional! but maybe can work this way
 
 
