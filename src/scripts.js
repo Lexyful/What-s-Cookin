@@ -125,13 +125,16 @@ const viewHomePage = () => {
             <button class="hidden" id="pink-heart-btn" data-parent="${recipe.id}">
                 <img class="heart-pink card-icon" src="/images/heart-pink.png" alt="a heart to add recipe to favorites">
             </button>
+            <button class="view-recipe-button" id="viewRecipeButton"></button>
         </article>
         </div>
     </article>
   `);
 };
 
-function viewLargeRecipe(){
+function viewLargeRecipe(event){
+  let buttonViewRecipe = document.getElementById('viewRecipeButton')
+  buttonViewRecipe.event.target.id
   largeRecipeCardContainer.innerHTML = ''
   let largeRecipeHTML = recipeRolodex.recipes.find(recipe => 
     largeRecipeCardContainer.innerHTML += `
