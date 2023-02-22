@@ -21,6 +21,8 @@ const miniCardList = document.getElementById('miniCardList');
 
 const miniCardSingle = document.getElementById('recipeCard')
 
+const largeRecipeCardContainer = document.getElementById('largeRecipeCardContainer')
+
 const defaultView = document.getElementById('mainScreen');
 const overlay = document.querySelector('.overlay');
 
@@ -58,6 +60,8 @@ window.addEventListener('load', () => {
 });
 
 recipeContainer.addEventListener('click', saveRecipe)
+
+largeRecipeCardContainer.addEventListener('click', viewLargeRecipe)
 
 buttonSearch.addEventListener('click', function() {
   if (searchBar.value.startsWith("#")) {
@@ -125,6 +129,21 @@ const viewHomePage = () => {
         </div>
     </article>
   `);
+};
+
+function viewLargeRecipe(){
+  largeRecipeCardContainer.innerHTML = ''
+  let largeRecipeHTML = recipeRolodex.recipes.find(recipe => 
+    largeRecipeCardContainer.innerHTML += `
+    <article class=large-recipe-card >
+    <div class="ingredients" id="ingredients">
+              <h2>Recipe</h2>
+              <div class="ingredeient-list" id="ingredientList">
+              </div>
+              <img class="food-pic" id="foodPic">
+              <button class="saved-recipe" id="savedRecipe">
+            </div>
+            </article>`);
 };
 
 
