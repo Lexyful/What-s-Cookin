@@ -23,7 +23,7 @@
           <!-- <button class="directory-button" id="savedRecipesButton"><img class="shiba-stare" src="/src/images/shiba-cool.png" style='vertical-align:middle;' alt="doge wearing sunglasses icon">SAVED RECIPES</button> -->
         </section>
       </nav>
-      <div class="main overlay" id="mainScreen">
+      <div class="main" id="mainScreen">
         <section class="main-toast-section" id="toastSection">
           <h1 class="whats-cookin-title">What's Cookin'</h1>
           <div class="search-by-name-container">
@@ -42,12 +42,15 @@
           <!-- this is where the mini cards go! -->
         </section>
         
-        <section class="mini-cards-section" id="miniCardSection">
-            <section class="mini-card-list" id="miniCardList">
-    
-            </section>
+
+<!-- these arent being used? -->
+        <!-- <section class="mini-cards-section" id="miniCardSection">
+            <section class="mini-card-list" id="miniCardList"> 
+            </section> -->
+
 
             <section class="recipe-display hidden">
+
               <section class="recipe-display-main">
                 <img class="x-menu" src="https://i.postimg.cc/267wS30Y/close.png" alt="x icon for exiting information on a recipe">
                 <h3>Recipe Instructions</h3>
@@ -70,16 +73,20 @@
     </div> 
     
 
-<!-- recipe icons to click on -->
-<!-- hidden pop-up recipe card 
-          <article class="overlay hidden recipe-card" id="recipeCard">
+
+ 
+          <article class="overlay hidden big-recipe-card" id="recipeCard">
             <div class="ingredients-flex" id="ingredientsFlex">
               <h2>Recipe</h2>
-              <aside class="ingredeient-list" id="ingredientList"></aside>
+
+              <div class="ingredeient-list" id="ingredientList">
+              </div>
+
               <img class="food-pic" id="foodPic">
               <button class="saved-recipe" id="savedRecipe">
             </div>  
           </article>
+
   </body> 
   
   <script src="bundle.js"></script>

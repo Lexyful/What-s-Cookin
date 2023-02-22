@@ -79,8 +79,6 @@ if(input.length > 0) {
 
 function searchForRecipeTag(input) {
     const recipeFound = recipeRolodex.getRecipeByTag(input)
-    console.log("recipe found:", recipeFound)
-  // console.log("recipe repository:", recipeRolodex)
     if(input.length > 0) {
     console.log("here", recipeRolodex.getRecipeByTag(input).length)
     recipeContainer.innerHTML = ""
@@ -135,23 +133,17 @@ function saveRecipe(event){
   let parent = event.target.closest('article');
   let heartBtn = parent.firstElementChild;
   let pinkHeartBtn = parent.lastElementChild;
-    // console.log("event!", parent.parentNode)
     recipeRolodex.recipes
       .forEach(recipe => {
           if(recipe.id === +(event.target.closest('article').dataset.parent) && !recipe.pinkHeartBtn){
-            // console.log('this is firing', event.target.closest('article').dataset.parent)
               recipe.pinkHeartBtn = true
-              // console.log(recipe.pinkHeartBtn)
               userProfile.recipesToCook.push(recipe)
             hide(heartBtn)
             show(pinkHeartBtn)
           } else if(recipe.id === +(event.target.closest('article').dataset.parent) && recipe.pinkHeartBtn){
-            // console.log('this is firing a secod time', event.target.closest('article').dataset.parent)
               recipe.pinkHeartBtn = false
-              // console.log(recipe.pinkHeartBtn)
               const currentRecipeIndex = userProfile.recipesToCook
                 .findIndex(currentRecipe => currentRecipe.id === recipe.id)
-
                 console.log(userProfile.recipesToCook)
                 userProfile.recipesToCook.splice(currentRecipeIndex, 1)
                 console.log(userProfile.recipesToCook)
@@ -164,7 +156,7 @@ function saveRecipe(event){
 
 
 
-// **** note: favorites do not persist once a tag or name is searched
+// **** note: heart in DOM does not persist once a tag or name is searched (still in data model)
 
 function viewRecipesByTag(recipeTag) {
   // console.log("tag name:", recipeTag.name)
