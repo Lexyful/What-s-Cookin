@@ -64,35 +64,64 @@ recipeContainer.addEventListener('click', saveRecipe)
 // buttonViewRecipe.addEventListener('click', viewLargeRecipe)
 
 buttonSearch.addEventListener('click', function() {
-  if (searchBar.value.startsWith("#")) {
-      searchForRecipeTag(searchBar.value.slice(1))
-  } else {
-      searchForRecipeName(searchBar.value)
-  }
-});
+  const searchValue = searchBar.value
+  const nameInput = searchValue.startsWith("#") ? "" : searchValue
+  const tagInput = searchValue.startsWith("#") ? searchValue.slice(1) : ""
+  searchForRecipe(nameInput, tagInput)
+})
 
-function searchForRecipeName(input) {
-  const recipeNameFound = recipeRolodex.getRecipeByName(input)
-if(input.length > 0) {
-  recipeContainer.innerHTML = ""
-  viewRecipesByName(recipeNameFound)
-} else {
-  recipeContainer.innerHTML = `<h2>Cool Shiba says, no. Try again.</h2>`
+function searchForRecipe(nameInput, tagInput) {
+  if (tagInput) {
+    const recipeTagFound = recipeRolodex.getRecipeByTag(tagInput)
+    if (recipeTagFound.length > 0) {
+      recipeContainer.innerHTML = ""
+      viewRecipesByTag(recipeTagFound)
+    } else {
+      recipeContainer.innerHTML = `<h2>Cool Shiba says, no. Try again.</h2>`
+    }
+  } else if (nameInput) {
+    const recipeNameFound = recipeRolodex.getRecipeByName(nameInput)
+    if (recipeNameFound.length > 0) {
+      recipeContainer.innerHTML = ""
+      viewRecipesByName(recipeNameFound)
+    } else {
+      recipeContainer.innerHTML = `<h2>Cool Shiba says, no. Try again.</h2>`
+    }
+  } else {
+    recipeContainer.innerHTML = `<h2>Cool Shiba says, no. Try again.</h2>`
   }
 }
 
-function searchForRecipeTag(input) {
-    const recipeFound = recipeRolodex.getRecipeByTag(input)
-    if(input.length > 0) {
-    console.log("here", recipeRolodex.getRecipeByTag(input).length)
-    recipeContainer.innerHTML = ""
-    viewRecipesByTag(recipeFound)
-    } else { 
-    recipeContainer.innerHTML = `<h2>Cool Shiba says, no. Try again.</h2>`
-  }
-};
+// EVENT LISTENER // Functions combined
 
+// buttonSearch.addEventListener('click', function() {
+//   if (searchBar.value.startsWith("#")) {
+//       searchForRecipeTag(searchBar.value.slice(1))
+//   } else {
+//       searchForRecipeName(searchBar.value)
+//   }
+// });
 
+// function searchForRecipeName(input) {
+//   const recipeNameFound = recipeRolodex.getRecipeByName(input)
+// if(input.length > 0) {
+//   recipeContainer.innerHTML = ""
+//   viewRecipesByName(recipeNameFound)
+// } else {
+//   recipeContainer.innerHTML = `<h2>Cool Shiba says, no. Try again.</h2>`
+//   }
+// }
+
+// function searchForRecipeTag(input) {
+//     const recipeFound = recipeRolodex.getRecipeByTag(input)
+//     if(input.length > 0) {
+//     console.log("here", recipeRolodex.getRecipeByTag(input).length)
+//     recipeContainer.innerHTML = ""
+//     viewRecipesByTag(recipeFound)
+//     } else { 
+//     recipeContainer.innerHTML = `<h2>Cool Shiba says, no. Try again.</h2>`
+//   }
+// };
 // else if(recipeRolodex.getRecipeByName(input).length > 0){
 //   viewRecipeByName(input)
 
