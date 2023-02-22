@@ -21,7 +21,6 @@ class User{
     
     filterRecipesByName(name){
         const recipesByName = this.recipesToCook.filter((recipe) => recipe.name.includes(name))
-        // console.log(this.recipesToCook[1])
         return recipesByName
     }
 };

@@ -253,6 +253,9 @@ h2 {
   height: 2vh;
   width: 2vw;
 }
+
+
+/* this is not a class */
 .card-image {
   border: 0.1em solid #422800;
   border-radius: 20px;
@@ -263,16 +266,20 @@ h2 {
   background-color: rgb(144, 96, 0);
   color: #fbeee0;
 }
+.recipe-image {
+  height: 100px
+  
+}
+/* these are not classes what are these*/
+
+
+
 .recipe-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.recipe-image {
-  height: 100px
-  
-}
 
 
 
@@ -280,16 +287,17 @@ h2 {
 
 
 
-/* .overlay {
+
+.overlay {
 	background: rgba( 26, 26, 26, 0.7 );
 	position: fixed;
 	width: 100%;
 	height: 100%;
 	top: 0;
-    left: 0;
-} */
+  left: 0;
+}
 
-.recipe-card {
+.big-recipe-card {
   /* display: flex; */
   /* flex-direction: column; */
   /* align-items: center; */
