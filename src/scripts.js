@@ -61,7 +61,7 @@ window.addEventListener('load', () => {
 
 recipeContainer.addEventListener('click', saveRecipe)
 
-largeRecipeCardContainer.addEventListener('click', viewLargeRecipe)
+// buttonViewRecipe.addEventListener('click', viewLargeRecipe)
 
 buttonSearch.addEventListener('click', function() {
   if (searchBar.value.startsWith("#")) {
@@ -125,7 +125,7 @@ const viewHomePage = () => {
             <button class="hidden" id="pink-heart-btn" data-parent="${recipe.id}">
                 <img class="heart-pink card-icon" src="/images/heart-pink.png" alt="a heart to add recipe to favorites">
             </button>
-            <button class="view-recipe-button" id="viewRecipeButton"></button>
+            <button class="view-recipe-button" id="viewRecipeButton" data-parent="${recipe.id}"></button>
         </article>
         </div>
     </article>
@@ -135,20 +135,24 @@ const viewHomePage = () => {
 function viewLargeRecipe(event){
   let buttonViewRecipe = document.getElementById('viewRecipeButton')
   buttonViewRecipe.event.target.id
+  console.log()
   largeRecipeCardContainer.innerHTML = ''
   let largeRecipeHTML = recipeRolodex.recipes.find(recipe => 
     largeRecipeCardContainer.innerHTML += `
     <article class=large-recipe-card >
     <div class="ingredients" id="ingredients">
-              <h2>Recipe</h2>
-              <div class="ingredeient-list" id="ingredientList">
-              </div>
-              <img class="food-pic" id="foodPic">
-              <button class="saved-recipe" id="savedRecipe">
-            </div>
-            </article>`);
-};
-
+    <h2>${recipe.name}</h2>
+    <div class="ingredeient-list" id="ingredientList">
+    <p>${recipe.ingredients}</p>
+    <p>${recipe.instructions}</p>
+    </div>
+    <img class="card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
+    <button class="saved-recipe" id="savedRecipe">
+    </div>
+    </article>`);
+    show(largeRecipeCardContainer)
+  };
+  buttonViewRecipe.addEventListener('click', viewLargeRecipe)
 
 
 function saveRecipe(event){
