@@ -48,11 +48,11 @@ window.addEventListener('load', () => {
     userProfile = new User(data[0].usersData.find(user => user.id === idNum))
     // console.log('user profile:', userProfile)
     // ingredientsData = allApis[1]
-    const classRecipeData = data[2].recipeData.map(recipe => {
-      return new Recipe(recipe, ingredientsData)
-    })
+    // const recipe = data[2].recipeData.map(recipe => {
+    //   return new Recipe(recipe, ingredientsData)
+    // })
 // console.log(classRecipeData)
-    recipeRolodex = new RecipeRepository(classRecipeData)
+    recipeRolodex = new RecipeRepository(data[2].recipeData)
 
     // console.log(recipeRolodex)
     viewHomePage()
@@ -186,38 +186,40 @@ function saveRecipe(){
   let heartBtn = parent.firstElementChild;
   let pinkHeartBtn = parent.lastElementChild;
     recipeRolodex.recipes
-      .forEach(recipe => {
-          if(recipe.id === +(event.target.closest('article').dataset.parent) && !recipe.pinkHeartBtn){
-              recipe.pinkHeartBtn = true
-              userProfile.recipesToCook.push(recipe)
-            hide(heartBtn)
-            show(pinkHeartBtn)
-          } else if(recipe.id === +(event.target.closest('article').dataset.parent) && recipe.pinkHeartBtn){
-              recipe.pinkHeartBtn = false
+              // recipe.pinkHeartBtn = true
+              userProfile.recipesToCook.push(userProfile.recipe)
+              console.log(userProfile.classRecipeData)
+            // hide(heartBtn)
+            // show(pinkHeartBtn)
+            
+}
+              
+  function unsaveRecipe(){
+          recipe.pinkHeartBtn = false
               const currentRecipeIndex = userProfile.recipesToCook
                 .findIndex(currentRecipe => currentRecipe.id === recipe.id)
                 console.log(userProfile.recipesToCook)
                 userProfile.recipesToCook.splice(currentRecipeIndex, 1)
                 console.log(userProfile.recipesToCook)
-              hide(pinkHeartBtn)
-              show(heartBtn)
-          }
-      }) 
+              // hide(pinkHeartBtn)
+              // show(heartBtn)
+  }
+       
       // console.log("recipes to cook",userProfile.recipesToCook)
-  };
+  
 
   function clickRecipeContainer(event){
     const chosenRecipeId = event.target.closest('article').dataset.parent
     console.log('hi', chosenRecipeId)
     console.log(event.target.id)
     if(event.target.id === 'heartIcon'){
-      // saveRecipe(chosenRecipeId)
+      saveRecipe(chosenRecipeId)
     } 
     if(event.target.id === 'pinkHeartBtn'){
-      
+      unsaveRecipe(chosenRecipeId)
     }
     if(event.target.id === 'viewRecipeButton'){
-      viewLargeRecipe()
+      viewLargeRecipe(chosenRecipeId)
     }
   }
 

@@ -6,7 +6,7 @@ class Recipe {
         this.instructions = recipeData.instructions
         this.name = recipeData.name
         this.tags = recipeData.tags
-        this.pinkHeartBtn = false
+        // this.pinkHeartBtn = false
         this.ingredientsData = ingredientsData
         
        
