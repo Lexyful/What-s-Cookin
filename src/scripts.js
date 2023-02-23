@@ -59,7 +59,7 @@ window.addEventListener('load', () => {
     }) 
 });
 
-recipeContainer.addEventListener('click', saveRecipe)
+recipeContainer.addEventListener('click', clickRecipeContainer)
 
 // buttonViewRecipe.addEventListener('click', viewLargeRecipe)
 
@@ -148,44 +148,41 @@ const viewHomePage = () => {
         </article>
             <h2 class="recipe-name" data-parent="${recipe.id}">${recipe.name}</h2>
         <article class="all-card-icons" data-parent="${recipe.id}">
-            <button data-title="Click to save this recipe!" id="heart-btn" data-parent="${recipe.id}">
+            <button data-title="Click to save this recipe!" id="heartBtn" data-parent="${recipe.id}">
                 <img class="heart-icon card-icon" id="heartIcon" src="/images/heart-icon.png" alt="a heart to add recipe to favorites">
             </button>
-            <button class="hidden" id="pink-heart-btn" data-parent="${recipe.id}">
+            <button class="hidden" id="pinkHeartBtn" data-parent="${recipe.id}">
                 <img class="heart-pink card-icon" src="/images/heart-pink.png" alt="a heart to add recipe to favorites">
             </button>
-            <button class="view-recipe-button" id="viewRecipeButton" data-parent="${recipe.id}"></button>
+            <button class="view-recipe-button" id="viewRecipeButton" data-parent="${recipe.id}">view</button>
         </article>
         </div>
     </article>
   `);
 };
 
-function viewLargeRecipe(event){
-  let buttonViewRecipe = document.getElementById('viewRecipeButton')
-  buttonViewRecipe.event.target.id
-  console.log()
+function viewLargeRecipe(){
   largeRecipeCardContainer.innerHTML = ''
   let largeRecipeHTML = recipeRolodex.recipes.find(recipe => 
     largeRecipeCardContainer.innerHTML += `
-    <article class=large-recipe-card >
+  <article class=large-recipe-card >
     <div class="ingredients" id="ingredients">
-    <h2>${recipe.name}</h2>
+      <h2>${recipe.name}</h2>
     <div class="ingredeient-list" id="ingredientList">
-    <p>${recipe.ingredients}</p>
-    <p>${recipe.instructions}</p>
+      <p>${recipe.ingredients}</p>
+      <p>${recipe.instructions}</p>
     </div>
-    <img class="card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
-    <button class="saved-recipe" id="savedRecipe">
+      <img class="card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
+      <button class="saved-recipe" id="savedRecipe">
     </div>
     </article>`);
     show(largeRecipeCardContainer)
   };
-  buttonViewRecipe.addEventListener('click', viewLargeRecipe)
+  // buttonViewRecipe.addEventListener('click', viewLargeRecipe)
 
 
-function saveRecipe(event){
-  let parent = event.target.closest('article');
+function saveRecipe(){
+  console.log('hello world')
   let heartBtn = parent.firstElementChild;
   let pinkHeartBtn = parent.lastElementChild;
     recipeRolodex.recipes
@@ -206,8 +203,23 @@ function saveRecipe(event){
               show(heartBtn)
           }
       }) 
-      console.log("recipes to cook",userProfile.recipesToCook)
+      // console.log("recipes to cook",userProfile.recipesToCook)
   };
+
+  function clickRecipeContainer(event){
+    const chosenRecipeId = event.target.closest('article').dataset.parent
+    console.log('hi', chosenRecipeId)
+    console.log(event.target.id)
+    if(event.target.id === 'heartIcon'){
+      // saveRecipe(chosenRecipeId)
+    } 
+    if(event.target.id === 'pinkHeartBtn'){
+      
+    }
+    if(event.target.id === 'viewRecipeButton'){
+      viewLargeRecipe()
+    }
+  }
 
 
 
