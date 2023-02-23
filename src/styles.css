@@ -281,6 +281,18 @@ h2 {
 }
 
 
+#heartBtn {
+  height: 30px;
+  width: 27px;
+}
+#viewRecipeButton {
+  height: 18px;
+  width: 42px;
+}
+.card-icon {
+  height: 3vh;
+  width: 2vw;
+}
 
 
 
