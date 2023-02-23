@@ -207,9 +207,11 @@ function saveRecipe(){
   };
 
   function clickRecipeContainer(event){
+    const chosenRecipeId = event.target.closest('article').dataset.parent
+    console.log('hi', chosenRecipeId)
     console.log(event.target.id)
-    if(event.target.id === 'heartBtn'){
-      saveRecipe()
+    if(event.target.id === 'heartIcon'){
+      // saveRecipe(chosenRecipeId)
     } 
     if(event.target.id === 'pinkHeartBtn'){
       
