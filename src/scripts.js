@@ -6,7 +6,6 @@ import RecipeRepository from './classes/RecipeRepository';
 import './images/heart-pink.png'
 import './images/heart-icon.png'
 
-// let userData;
 let ingredientsData;
 let recipeRolodex;
 let userProfile;
@@ -30,13 +29,6 @@ const buttonSavedRecipes = document.getElementById('savedRecipesButton');
 const buttonSearch = document.getElementById('searchBtn');
 const searchBar = document.getElementById('searchBar');
 const buttonSearchYourRecipes = document.getElementById("searchYourRecipeBtn");
-
-// const heartIcon = document.getElementById('heartIcon');
-// const heartPink = document.querySelector('heart-pink');
-
-
-// buttonSearchYourRecipes.addEventListener('click', viewRecipesToCookbyTag);
-// buttonSearchYourRecipes.addEventListener('click', viewRecipesToCookbyTag);
 
 window.addEventListener('load', () => {
     fetchAll()
@@ -70,7 +62,7 @@ buttonSearch.addEventListener('click', function() {
 
 function searchForRecipe(nameInput, tagInput) {
   if (tagInput) {
-    const recipeTagFound = recipeRolodex.getRecipeByTag(tagInput)
+    const recipeTagFound = recipeRolodex.getRecipesByTag(tagInput)
     if (recipeTagFound.length > 0) {
       recipeContainer.innerHTML = ""
       viewRecipesByTag(recipeTagFound)
@@ -78,7 +70,7 @@ function searchForRecipe(nameInput, tagInput) {
       recipeContainer.innerHTML = `<h2>Cool Shiba says, no. Try again.</h2>`
     }
   } else if (nameInput) {
-    const recipeNameFound = recipeRolodex.getRecipeByName(nameInput)
+    const recipeNameFound = recipeRolodex.getRecipesByName(nameInput)
     if (recipeNameFound.length > 0) {
       recipeContainer.innerHTML = ""
       viewRecipesByName(recipeNameFound)
@@ -89,39 +81,6 @@ function searchForRecipe(nameInput, tagInput) {
     recipeContainer.innerHTML = `<h2>Cool Shiba says, no. Try again.</h2>`
   }
 }
-
-// EVENT LISTENER // Functions combined
-
-// buttonSearch.addEventListener('click', function() {
-//   if (searchBar.value.startsWith("#")) {
-//       searchForRecipeTag(searchBar.value.slice(1))
-//   } else {
-//       searchForRecipeName(searchBar.value)
-//   }
-// });
-
-// function searchForRecipeName(input) {
-//   const recipeNameFound = recipeRolodex.getRecipeByName(input)
-// if(input.length > 0) {
-//   recipeContainer.innerHTML = ""
-//   viewRecipesByName(recipeNameFound)
-// } else {
-//   recipeContainer.innerHTML = `<h2>Cool Shiba says, no. Try again.</h2>`
-//   }
-// }
-
-// function searchForRecipeTag(input) {
-//     const recipeFound = recipeRolodex.getRecipeByTag(input)
-//     if(input.length > 0) {
-//     console.log("here", recipeRolodex.getRecipeByTag(input).length)
-//     recipeContainer.innerHTML = ""
-//     viewRecipesByTag(recipeFound)
-//     } else { 
-//     recipeContainer.innerHTML = `<h2>Cool Shiba says, no. Try again.</h2>`
-//   }
-// };
-// else if(recipeRolodex.getRecipeByName(input).length > 0){
-//   viewRecipeByName(input)
 
 function getRandomUserId(){
     return Math.floor(Math.random() * 41);
@@ -163,21 +122,19 @@ function viewLargeRecipe(){
   largeRecipeCardContainer.innerHTML = ''
   let largeRecipeHTML = recipeRolodex.recipes.find(recipe => 
     largeRecipeCardContainer.innerHTML += `
-  <article class=large-recipe-card >
-    <div class="ingredients" id="ingredients">
-      <h2>${recipe.name}</h2>
-    <div class="ingredeient-list" id="ingredientList">
-      <p>${recipe.ingredients}</p>
-      <p>${recipe.instructions}</p>
-    </div>
-      <img class="card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
-      <button class="saved-recipe" id="savedRecipe">
-    </div>
+    <article class=large-recipe-card >
+      <div class="ingredients" id="ingredients">
+        <h2>${recipe.name}</h2>
+      <div class="ingredeient-list" id="ingredientList">
+        <p>${recipe.ingredients}</p>
+        <p>${recipe.instructions}</p>
+      </div>
+        <img class="card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
+        <button class="saved-recipe" id="savedRecipe">
+      </div>
     </article>`);
     show(largeRecipeCardContainer)
   };
-  // buttonViewRecipe.addEventListener('click', viewLargeRecipe)
-
 
 function saveRecipe(chosenRecipeId){
     const heartIcon = document.getElementById(`${chosenRecipeId}whiteIcon`);
