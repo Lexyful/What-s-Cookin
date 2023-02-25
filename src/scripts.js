@@ -6,12 +6,12 @@ import RecipeRepository from './classes/RecipeRepository';
 import './images/heart-pink.png'
 import './images/heart-icon.png'
 
-import ingredientsData from './data/ingredients'
+// import ingredientsData from './data/ingredients'
 // ^^ this is the problem, it's this
 // need to work on connecting the api to the classes, some of them arent talking atm
 
-let userData;
-// let ingredientsData;
+// let userData;
+let ingredientsData;
 let recipeRolodex;
 let userProfile;
 
@@ -48,11 +48,11 @@ window.addEventListener('load', () => {
     console.log('data', data)
     userProfile = new User(data[0].users.find(user => user.id === idNum))
     console.log('user profile:', userProfile)
-    ingredientsData = allApis[1]
+    // ingredientsData = allApis[1]
     const recipe = data[1].ingredients.map(recipe => {
       return new Recipe(recipe, ingredientsData)
     })
-console.log(classRecipeData)
+// console.log(classRecipeData)
     recipeRolodex = new RecipeRepository(data[2].recipes)
 
     // console.log(recipeRolodex)
