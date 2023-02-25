@@ -1,18 +1,17 @@
 class RecipeRepository {
   constructor(recipes) {
     this.recipes = recipes
-    // this.storedRecipes 
   }
   
-  getRecipeByTag(tag) {
-    const viewRecipeByTag = this.recipes.filter(recipe => recipe.tags.includes(tag));
-   return viewRecipeByTag
-}
-
-    getRecipeByName(name){
+  getRecipesByTag(tag) {
+    return this.recipes.filter(recipe => recipe.tags.includes(tag));  
+  }
+  getRecipesByName(name){
     return this.recipes.filter(recipe => recipe.name.includes(name));
-    
-    }
-}
+  }
+  getRecipeById(id){
+    return this.recipes.find(recipe => recipe.id === +id);
+  }
+};
 
 export default RecipeRepository;
