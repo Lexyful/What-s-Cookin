@@ -6,10 +6,6 @@ import RecipeRepository from './classes/RecipeRepository';
 import './images/heart-pink.png'
 import './images/heart-icon.png'
 
-// import ingredientsData from './data/ingredients'
-// ^^ this is the problem, it's this
-// need to work on connecting the api to the classes, some of them arent talking atm
-
 // let userData;
 let ingredientsData;
 let recipeRolodex;
@@ -45,9 +41,9 @@ window.addEventListener('load', () => {
     fetchAll()
     .then(data => {
     const idNum = getRandomUserId()
-    console.log('data', data)
+    // console.log('data', data)
     userProfile = new User(data[0].users.find(user => user.id === idNum))
-    console.log('user profile:', userProfile)
+    // console.log('user profile:', userProfile)
     // ingredientsData = allApis[1]
     const recipe = data[1].ingredients.map(recipe => {
       return new Recipe(recipe, ingredientsData)
@@ -182,36 +178,51 @@ function viewLargeRecipe(){
   // buttonViewRecipe.addEventListener('click', viewLargeRecipe)
 
 
-function saveRecipe(){
-  console.log('hello world')
+function saveRecipe(chosenRecipeId){
+  // console.log('this is the saveRecipe function')
+  // console.log('chosenRecipeId', chosenRecipeId)
   let heartBtn = parent.firstElementChild;
   let pinkHeartBtn = parent.lastElementChild;
-    recipeRolodex.recipes
+    // 
+        // console.log('this is the rolodex', recipeRolodex)
+
               // recipe.pinkHeartBtn = true
-              userProfile.recipesToCook.push(userProfile.recipe)
-              console.log(userProfile.classRecipeData)
-            // hide(heartBtn)
-            // show(pinkHeartBtn)
-            
-}
+
+             const chosenRecipe = recipeRolodex.getRecipeById(chosenRecipeId)
+             userProfile.recipesToCook.push(chosenRecipe)
+             
               
-  function unsaveRecipe(){
-          recipe.pinkHeartBtn = false
-              const currentRecipeIndex = userProfile.recipesToCook
-                .findIndex(currentRecipe => currentRecipe.id === recipe.id)
-                console.log(userProfile.recipesToCook)
-                userProfile.recipesToCook.splice(currentRecipeIndex, 1)
-                console.log(userProfile.recipesToCook)
+              console.log(userProfile.recipesToCook)
+            // hide(heartBtn)
+            // show(pinkHeartBtn)       
+};
+              
+  function unsaveRecipe(chosenRecipeId){
+    console.log('this is the unsaveRecipe function')
+          // recipe.pinkHeartBtn = false
+
+
+          const chosenRecipe = recipeRolodex.getRecipeById(chosenRecipeId)
+          
+          userProfile.recipesToCook.splice(chosenRecipe)
+
+
+
+              // const currentRecipeIndex = userProfile.recipesToCook
+              //   .findIndex(currentRecipe => currentRecipe.id === recipe.id)
+              //   console.log(userProfile.recipesToCook)
+              //   userProfile.recipesToCook.splice(currentRecipeIndex, 1)
+              //   console.log(userProfile.recipesToCook)
               // hide(pinkHeartBtn)
               // show(heartBtn)
-  }
+  };
        
       // console.log("recipes to cook",userProfile.recipesToCook)
   
 
   function clickRecipeContainer(event){
     const chosenRecipeId = event.target.closest('article').dataset.parent
-    console.log('hi', chosenRecipeId)
+    console.log('hi this is the chosen recipe', chosenRecipeId)
     console.log(event.target.id)
     if(event.target.id === 'heartIcon'){
       saveRecipe(chosenRecipeId)
@@ -222,7 +233,7 @@ function saveRecipe(){
     if(event.target.id === 'viewRecipeButton'){
       viewLargeRecipe(chosenRecipeId)
     }
-  }
+  };
 
 
 
