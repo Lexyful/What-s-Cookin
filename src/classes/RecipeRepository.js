@@ -13,7 +13,6 @@ class RecipeRepository {
 
   getRecipeById(id){
     return this.recipes.find(recipe => {
-      // console.log(id, recipe.id)
       return recipe.id === +id
     });
   }
