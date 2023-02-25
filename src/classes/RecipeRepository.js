@@ -4,17 +4,13 @@ class RecipeRepository {
   }
   
   getRecipesByTag(tag) {
-    return this.recipes.filter(recipe => recipe.tags.includes(tag));
-}
-
+    return this.recipes.filter(recipe => recipe.tags.includes(tag));  
+  }
   getRecipesByName(name){
     return this.recipes.filter(recipe => recipe.name.includes(name));
-    }
-
+  }
   getRecipeById(id){
-    return this.recipes.find(recipe => {
-      return recipe.id === +id
-    });
+    return this.recipes.find(recipe => recipe.id === +id);
   }
 };
 

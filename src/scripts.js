@@ -180,52 +180,33 @@ function viewLargeRecipe(){
 
 
 function saveRecipe(chosenRecipeId){
-  // console.log('this is the saveRecipe function')
-  console.log('chosenRecipeId', chosenRecipeId)
-
-  const heartIcon = document.getElementById(`${chosenRecipeId}whiteIcon`);
-  const pinkHeartIcon = document.getElementById(`${chosenRecipeId}pinkBtn`);
-  const heartBtn = heartIcon.closest('button')
-  const pinkHeartBtn = pinkHeartIcon.closest('button')
-
-              recipe.pinkHeartBtn = true
-
-             const chosenRecipe = recipeRolodex.getRecipeById(chosenRecipeId)
-             userProfile.recipesToCook.push(chosenRecipe)
-             console.log('array', userProfile.recipesToCook)
-              
-              // console.log('look here!',userProfile.recipesToCook)
-            hide(heartBtn)
-            show(pinkHeartBtn)       
+    const heartIcon = document.getElementById(`${chosenRecipeId}whiteIcon`);
+    const pinkHeartIcon = document.getElementById(`${chosenRecipeId}pinkBtn`);
+    const heartBtn = heartIcon.closest('button')
+    const pinkHeartBtn = pinkHeartIcon.closest('button')
+      recipe.pinkHeartBtn = true
+      const chosenRecipe = recipeRolodex.getRecipeById(chosenRecipeId)
+      userProfile.recipesToCook.push(chosenRecipe)
+      console.log('array', userProfile.recipesToCook)   
+      hide(heartBtn)
+      show(pinkHeartBtn)       
 };
               
   function unsaveRecipe(chosenRecipeId){
-    console.log('this is the unsaveRecipe function')
-
     const heartBtn = document.getElementById(`${chosenRecipeId}whiteIcon`).closest('button')
     const pinkHeartBtn = document.getElementById(`${chosenRecipeId}pinkBtn`).closest('button')
-
-          recipe.pinkHeartBtn = false
-
-          const chosenRecipe = recipeRolodex.getRecipeById(chosenRecipeId)
-          userProfile.recipesToCook.splice(chosenRecipe, 1)
-
-              // const currentRecipeIndex = userProfile.recipesToCook
-              //   .findIndex(currentRecipe => currentRecipe.id === recipe.id)
-              //   console.log(userProfile.recipesToCook)
-              //   userProfile.recipesToCook.splice(currentRecipeIndex, 1)
-                console.log(userProfile.recipesToCook)
-              hide(pinkHeartBtn)
-              show(heartBtn)
+      recipe.pinkHeartBtn = false
+        const currentRecipeIndex = userProfile.recipesToCook
+          .findIndex(currentRecipe => currentRecipe.id === +chosenRecipeId)
+          // console.log(currentRecipeIndex)
+          userProfile.recipesToCook.splice(currentRecipeIndex, 1)  
+          // console.log(userProfile.recipesToCook)
+          hide(pinkHeartBtn)
+          show(heartBtn)
   };
        
-      // console.log("recipes to cook",userProfile.recipesToCook)
-  
-
   function clickRecipeContainer(event){
     const chosenRecipeId = event.target.closest('div').dataset.parent
-    // console.log('hi this is the chosen recipe', chosenRecipeId)
-    // console.log(event.target.id)
     if(event.target.className.includes('heart-icon')){
       saveRecipe(chosenRecipeId)
     } 
@@ -237,30 +218,25 @@ function saveRecipe(chosenRecipeId){
     }
   };
 
-
-
-// **** note: heart in DOM does not persist once a tag or name is searched (still in data model)
-
 function viewRecipesByTag(recipeTag) {
-  // console.log("tag name:", recipeTag.name)
   const searchTag = recipeTag.forEach(recipe => {
   recipeContainer.innerHTML += `
-<article class="one-recipe">
-<div class="mini-recipe-card" data-parent="${recipe.id}">
-<article class="card-image-section">
-    <img class="card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
-</article>
-    <h2 class="recipe-name" data-parent="${recipe.id}">${recipe.name}</h2>
-<article class="all-card-icons" data-parent="${recipe.id}">
-    <button data-title="Click to save this recipe!" id="heart-btn" data-parent="${recipe.id}">
-        <img class="heart-icon card-icon" id="heartIcon" src="/images/heart-icon.png" alt="a heart to add recipe to favorites">
-    </button>
-    <button class="hidden" id="pink-heart-btn" data-parent="${recipe.id}">
-        <img class="heart-pink card-icon" src="/images/heart-pink.png" alt="a heart to add recipe to favorites">
-    </button>
-</article>
-</div>
-</article>
+  <article class="one-recipe">
+    <div class="mini-recipe-card" data-parent="${recipe.id}">
+  <article class="card-image-section">
+      <img class="card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
+  </article>
+      <h2 class="recipe-name" data-parent="${recipe.id}">${recipe.name}</h2>
+  <article class="all-card-icons" data-parent="${recipe.id}">
+      <button data-title="Click to save this recipe!" id="heart-btn" data-parent="${recipe.id}">
+          <img class="heart-icon card-icon" id="heartIcon" src="/images/heart-icon.png" alt="a heart to add recipe to favorites">
+      </button>
+      <button class="hidden" id="pink-heart-btn" data-parent="${recipe.id}">
+          <img class="heart-pink card-icon" src="/images/heart-pink.png" alt="a heart to add recipe to favorites">
+      </button>
+  </article>
+  </div>
+  </article>
 `
   });
   return searchTag
@@ -290,28 +266,3 @@ const searchName = recipeTag.forEach(recipe => {
 });
 return searchName
 };
-
-
-// function viewRecipesToCookbyTag() {
-//   let recipesToCookTagHTML = userProfile.recipesToCook.filterRecipesByTag(tag).map(recipe => `    <article class="mini-recipe-card" data-parent="${recipe.id}>
-//   <article class="card-image-section">
-//     <img class="card-image" tabindex="0" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
-//   </article>
-//   <article class="recipe-name-area">
-//     <h2 class="recipe-name" tabindex="0" data-parent="${recipe.id}">${recipe.name}</h2><article class="all-card-icons">
-//     <button data-title="Click to save this recipe!" id="triggerInfoButton"><img class="heart-icon card-icon" id="triggerFavoritesIcon" tabindex="0" src="https://i.postimg.cc/9fSC0FND/heart.png" alt="a heart with a plus sign on the bottom corner for the add to favorites button"></button>
-//   </article>
-//   </article>
-// </article>`).join('')
-// recipeContainer.innerHTML = tagHTML;
-// }
-
-
-
-
-/*
-As a user, I should be able to view a list of all recipes.
-As a user, I should be able to click on a recipe to view more information including directions, ingredients needed, and total cost.
-As a user, I should be able to filter recipes by a tag. (Extension option: by multiple tags)
-As a user, I should be able to search recipes by their name. (Extension option: by name or ingredients)
-*/
