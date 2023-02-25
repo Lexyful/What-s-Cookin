@@ -98,10 +98,10 @@ const viewHomePage = () => {
         </div>
             <h2 class="recipe-name" data-parent="${recipe.id}">${recipe.name}</h2>
         <div class="all-card-icons" data-parent="${recipe.id}">
-            <button data-title="Click to save this recipe!" id="${recipe.id}button" data-parent="${recipe.id}" style=" height: 64px;">
+            <button data-title="Click to save this recipe!" id="${recipe.id}button" data-parent="${recipe.id}" style=" height: 32px;">
                 <img class="heart-icon card-icon" id="${recipe.id}whiteIcon" src="/images/heart-icon.png" alt="a heart to add recipe to favorites">
             </button>
-            <button class="hidden" id="${recipe.id}pinkBtn" data-parent="${recipe.id}" style=" height: 64px;">
+            <button class="hidden" id="${recipe.id}pinkBtn" data-parent="${recipe.id}" style=" height: 32px;">
                 <img class="pink-heart card-icon" src="/images/heart-pink.png" alt="a heart to add recipe to favorites">
             </button>
             <button class="view-recipe-button" id="viewRecipeButton" data-parent="${recipe.id}">view</button>
@@ -117,7 +117,7 @@ function viewLargeRecipe(){
     largeRecipeCardContainer.innerHTML += `
   <article class=large-recipe-card >
     <div class="ingredients" id="ingredients">
-      <h2>${recipe.name}</h2>
+      <h3>${recipe.name}</h3>
     <div class="ingredeient-list" id="ingredientList">
       <p>${recipe.ingredients}</p>
       <p>${recipe.instructions}</p>
@@ -178,10 +178,10 @@ function saveRecipe(chosenRecipeId){
     </article>
         <h2 class="recipe-name" data-parent="${recipe.id}">${recipe.name}</h2>
     <article class="all-card-icons" data-parent="${recipe.id}">
-        <button data-title="Click to save this recipe!" id="heart-btn" data-parent="${recipe.id}" style=" height: 64px;">
+        <button data-title="Click to save this recipe!" id="heart-btn" data-parent="${recipe.id}" style=" ">
             <img class="heart-icon card-icon" id="heartIcon" src="/images/heart-icon.png" alt="a heart to add recipe to favorites">
         </button>
-        <button class="hidden" id="pink-heart-btn" data-parent="${recipe.id}" style=" height: 64px;">
+        <button class="hidden" id="pink-heart-btn" data-parent="${recipe.id}" style=" height: 32px;">
             <img class="heart-pink card-icon" src="/images/heart-pink.png" alt="a heart to add recipe to favorites">
         </button>
     </article>
@@ -202,10 +202,10 @@ const searchName = recipeTag.forEach(recipe => {
   </article>
       <h2 class="recipe-name" data-parent="${recipe.id}">${recipe.name}</h2>
   <article class="all-card-icons" data-parent="${recipe.id}">
-      <button data-title="Click to save this recipe!" id="heart-btn" data-parent="${recipe.id}" style=" height: 64px;">
+      <button data-title="Click to save this recipe!" id="heart-btn" data-parent="${recipe.id}" style=" height: 32px;">
           <img class="heart-icon card-icon" id="heartIcon" src="/images/heart-icon.png" alt="a heart to add recipe to favorites">
       </button>
-      <button class="hidden" id="pink-heart-btn" data-parent="${recipe.id}" style=" height: 64px;">
+      <button class="hidden" id="pink-heart-btn" data-parent="${recipe.id}" style=" height: 32px;">
           <img class="heart-pink card-icon" src="/images/heart-pink.png" alt="a heart to add recipe to favorites">
       </button>
   </article>
