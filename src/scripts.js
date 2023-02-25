@@ -45,14 +45,15 @@ window.addEventListener('load', () => {
     fetchAll()
     .then(data => {
     const idNum = getRandomUserId()
-    userProfile = new User(data[0].usersData.find(user => user.id === idNum))
-    // console.log('user profile:', userProfile)
-    // ingredientsData = allApis[1]
-    // const recipe = data[2].recipeData.map(recipe => {
-    //   return new Recipe(recipe, ingredientsData)
-    // })
-// console.log(classRecipeData)
-    recipeRolodex = new RecipeRepository(data[2].recipeData)
+    console.log('data', data)
+    userProfile = new User(data[0].users.find(user => user.id === idNum))
+    console.log('user profile:', userProfile)
+    ingredientsData = allApis[1]
+    const recipe = data[1].ingredients.map(recipe => {
+      return new Recipe(recipe, ingredientsData)
+    })
+console.log(classRecipeData)
+    recipeRolodex = new RecipeRepository(data[2].recipes)
 
     // console.log(recipeRolodex)
     viewHomePage()

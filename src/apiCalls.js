@@ -6,9 +6,9 @@ const fetchData = (url) => {
 
 const fetchAll = () => {
    return Promise.all([
-    fetchData("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/users"),
-    fetchData("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/ingredients"),
-    fetchData("https://what-s-cookin-starter-kit.herokuapp.com/api/v1/recipes")
+    fetchData("http://localhost:3001/api/v1/users"),
+    fetchData("http://localhost:3001/api/v1/ingredients"),
+    fetchData("http://localhost:3001/api/v1/recipes")
 ])
 }
     export default fetchAll

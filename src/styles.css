@@ -310,6 +310,8 @@ h2 {
 }
 
 .big-recipe-card {
+  border:#35aebe;
+  border-width:5px;
   /* display: flex; */
   /* flex-direction: column; */
   /* align-items: center; */
@@ -319,3 +321,5 @@ h2 {
 	left: 50%;
 	transform: translate( -50%, -50% );
 }
+
+.ingredients{}
