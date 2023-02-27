@@ -30,7 +30,7 @@ const buttonSavedRecipes = document.getElementById('savedRecipesButton');
 const buttonSearch = document.getElementById('searchBtn');
 const searchBar = document.getElementById('searchBar');
 const buttonSearchYourRecipes = document.getElementById("searchYourRecipeBtn");
-
+const exitButton = document.querySelector(".exit-card-button");
 
 window.addEventListener('load', () => {
     fetchAll()
@@ -140,6 +140,10 @@ function viewLargeRecipe(){
     show(largeRecipeCardContainer)
   };
   // buttonViewRecipe.addEventListener('click', viewLargeRecipe)
+
+function hideLargeRecipeCardContainer() {
+  hide(largeRecipeCardContainer)
+}
 
 function saveRecipe(chosenRecipeId){
     const heartIcon = document.getElementById(`${chosenRecipeId}whiteIcon`);
