@@ -30,7 +30,7 @@ const buttonSavedRecipes = document.getElementById('savedRecipesButton');
 const buttonSearch = document.getElementById('searchBtn');
 const searchBar = document.getElementById('searchBar');
 const buttonSearchYourRecipes = document.getElementById("searchYourRecipeBtn");
-
+const exitButton = document.querySelector(".exit-card-button");
 
 window.addEventListener('load', () => {
     fetchAll()
@@ -115,20 +115,35 @@ function viewLargeRecipe(){
   largeRecipeCardContainer.innerHTML = ''
   let largeRecipeHTML = recipeRolodex.recipes.find(recipe => 
     largeRecipeCardContainer.innerHTML += `
-  <article class=large-recipe-card >
-    <div class="ingredients" id="ingredients">
-      <h3>${recipe.name}</h3>
-    <div class="ingredeient-list" id="ingredientList">
-      <p>${recipe.ingredients}</p>
-      <p>${recipe.instructions}</p>
+    <div class="recipe-info-card">  
+    <div class="exit-card-button-container">
+        <button class="exit-card-button"></button>
+      </div>
+    <div class=main-recipe-information-container>
+      <h2 class="recipe-title"><span>${recipe.name}</span></h2>
+        <div class="main-recipe-information">
+          <div class="column" id="firstColumn">
+            <h3>Ingredients</h3>
+            <p>${recipe.ingredients}</p>
+            <h3>Steps</h3>
+            <p>${recipe.instructions}</p>
+          </div>
+          <div class="column" id="secondColumn">
+            <img class="large-card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
+          </div>
+          <div class="save-recipe-button-container">
+            <button class="save-recipe-button">SAVE RECIPE</button>
+          </div>
+        </div>
     </div>
-      <img class="card-image" src="${recipe.image}" alt="image of ${recipe.name}" data-parent="${recipe.id}">
-      <button class="saved-recipe" id="savedRecipe">
-    </div>
-    </article>`);
+  </div>`);
     show(largeRecipeCardContainer)
   };
   // buttonViewRecipe.addEventListener('click', viewLargeRecipe)
+
+function hideLargeRecipeCardContainer() {
+  hide(largeRecipeCardContainer)
+}
 
 function saveRecipe(chosenRecipeId){
     const heartIcon = document.getElementById(`${chosenRecipeId}whiteIcon`);
