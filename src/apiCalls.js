@@ -4,6 +4,8 @@ const fetchData = (url) => {
     .then(response => response.json())
 }
 
+// Fetch Data Function
+
 const fetchAll = () => {
    return Promise.all([
     fetchData("http://localhost:3001/api/v1/users"),
@@ -12,3 +14,6 @@ const fetchAll = () => {
 ])
 }
     export default fetchAll
+
+
+    // if all promises fulfill "fetchData'- returns a promise.
